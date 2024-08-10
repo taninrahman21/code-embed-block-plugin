@@ -1,0 +1,115 @@
+{
+  "apiVersion": "1",
+  "name": "cebp/code-embed",
+  "title": "Code Embed",
+  "description": "Embed Code anywhere you want with a lot of functionality through this block.",
+  "category": "widgets",
+  "keywords": [
+    "code embed",
+    "code",
+    "embed code"
+  ],
+  "textdomain": "code-embed",
+  "attributes": {
+    "align": {
+      "type": "string",
+      "default": ""
+    },
+    "cId": {
+      "type": "string",
+      "default": ""
+    },
+    "content": {
+      "type": "string",
+      "default": ""
+    },
+    "language": {
+      "type": "string",
+      "default": "javascript"
+    },
+    "editorTheme": {
+      "type": "string",
+      "default": "github"
+    },
+    "copyBtnPosition": {
+      "type": "string",
+      "default": "topright"
+    },
+    "headingStyles": {
+      "type": "object",
+      "default": {
+        "headlineText": "",
+        "titleColor": "#fff",
+        "titleTypo": {
+          "fontSize": "14px"
+        },
+        "backgroundColor": "#000",
+        "padding": {
+          "top": "5px",
+          "right": "0px",
+          "bottom": "5px",
+          "left": "20px"
+        }
+      }
+    },
+    "options": {
+      "type": "object",
+      "default": {
+        "wrap": true,
+        "readOnly": true,
+        "showLineNumbers": true,
+        "showGutter": true,
+        "showPrintMargin": true,
+        "highlightActiveLine": true,
+        "enableBasicAutocompletion": true,
+        "enableLiveAutocompletion": true,
+        "wrapEnabled": true,
+        "displayHeading": true
+      }
+    },
+    "mainStyles": {
+      "type": "object",
+      "default": {
+        "height": "100px",
+        "width": "100%",
+        "padding": {
+          "top": "20px",
+          "right": "20px",
+          "bottom": "20px",
+          "left": "20px"
+        },
+        "fontSize": 20,
+        "lineHeight": 35,
+        "tabSize": 2
+      }
+    },
+    "btnStyle": {
+      "type": "object",
+      "default": {
+        "textColor": "white",
+        "backgroundColor": "#4a90e2",
+        "typo": {
+          "fontSize": "10px"
+        }
+      }
+    }
+  },
+  "supports": {
+    "align": [
+      "wide",
+      "full"
+    ],
+    "html": false
+  },
+  "example": {
+    "attributes": {
+      "preview": true,
+      "columns": {
+        "desktop": 1,
+        "tablet": 1,
+        "mobile": 1
+      }
+    }
+  },
+  "editorScript": "file:./../dist/editor.js"
+}

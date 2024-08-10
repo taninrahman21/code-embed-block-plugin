@@ -1,0 +1,46 @@
+$primaryColor: #4527a4;
+
+.cebpNowEditing {
+  outline: 2px solid $primaryColor;
+}
+
+.cebpInspectorInfo {
+  padding: 6px;
+
+  a {
+    text-decoration: none;
+    font-weight: bold;
+  }
+}
+
+.code-container {
+  border: 1px solid #edf2f7;
+  border-radius: 0.25rem;
+}
+
+.heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.heading p {
+  margin: 0;
+}
+
+.copy-btn {
+  border: none;
+  padding: 0.25rem 1rem;
+  cursor: pointer;
+  border-radius: 0.25rem;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.copy-btn:hover {
+  background-color: #357bd8;
+}
+
+.copy-btn.copied {
+  background-color: #51c16b;
+  transform: scale(0.95);
+}
