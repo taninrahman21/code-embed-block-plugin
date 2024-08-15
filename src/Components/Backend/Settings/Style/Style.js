@@ -1,13 +1,14 @@
-import React from 'react';
-import { PanelBody } from '@wordpress/components';
-import { __experimentalUnitControl as UnitControl, RangeControl } from '@wordpress/components';
+import { PanelBody, RangeControl, __experimentalUnitControl as UnitControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
+import React from 'react';
 
 import { BColor, Typography } from '../../../../../../Components';
+import { updateData } from '../../../../utils/functions';
 
 
 const Style = ({ attributes, setAttributes }) => {
-  const { mainStyles, options, headingStyles, btnStyle } = attributes;
+  const { mainStyles, options, headingStyles, btnStyle, mainEditor } = attributes;
+  const { copyBtnType } = mainEditor;
   const { titleColor, titleTypo, backgroundColor } = headingStyles;
   const { displayHeading } = options;
   const { height, width, fontSize, lineHeight, tabSize } = mainStyles;
@@ -71,7 +72,7 @@ const Style = ({ attributes, setAttributes }) => {
       }
 
       {/* Copy Button Style */}
-      <PanelBody title={__("Copy Button", "code-embed")} initialOpen={false}>
+      {copyBtnType == "text" && <PanelBody title={__("Copy Button", "code-embed")} initialOpen={false}>
         {/* Text Color */}
         <BColor
           label={__('Button Text Color', 'code-embed')}
@@ -88,11 +89,29 @@ const Style = ({ attributes, setAttributes }) => {
 
         {/* Font Size */}
         <Typography
-            label={__('Typography', 'code-embed')}
-            value={btnStyle.typo}
-            onChange={(typo) => setAttributes({ btnStyle: { ...btnStyle, typo } })}
-          />
+          label={__('Typography', 'code-embed')}
+          value={btnStyle.typo}
+          onChange={(typo) => setAttributes({ btnStyle: { ...btnStyle, typo } })}
+        />
+      </PanelBody>}
+
+      {/* Copy Button Style For Icon */}
+      {copyBtnType === 'icon' && <PanelBody title={__('Copy Button Style', 'code-embed')} initialOpen={false}>
+        {/* Icon Color */}
+        <BColor
+          label={__('Background Color', 'code-embed')}
+          value={btnStyle.copyBtnIconColor}
+          onChange={(color) => setAttributes({ btnStyle: updateData(btnStyle, color, "copyBtnIconColor") })}
+        />
+
+        {/* Icon Size */}
+        <RangeControl
+          label={__('Icon Size', 'code-embed')}
+          value={btnStyle.copyBtnIconSize}
+          onChange={(size) => setAttributes({ btnStyle: updateData(btnStyle, size, "copyBtnIconSize") })}
+        />
       </PanelBody>
+      }
     </>
   )
 }

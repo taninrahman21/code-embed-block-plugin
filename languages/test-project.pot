@@ -1,0 +1,60 @@
+# Copyright (C) 2024 bPlugins LLC
+# This file is distributed under the GPLv3.
+msgid ""
+msgstr ""
+"Project-Id-Version: Code Embed 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/code-embed\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2024-08-10T09:00:28+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.10.0\n"
+"X-Domain: code-embed\n"
+
+#. Plugin Name of the plugin
+#: D:\xampp\htdocs\wordpress\wp-content\plugins\code-embed\index.php
+msgid "Code Embed"
+msgstr ""
+
+#. Description of the plugin
+#: D:\xampp\htdocs\wordpress\wp-content\plugins\code-embed\index.php
+msgid "Embed Code anywhere you want with a lot of functionality through this block."
+msgstr ""
+
+#. Author of the plugin
+#: D:\xampp\htdocs\wordpress\wp-content\plugins\code-embed\index.php
+msgid "bPlugins LLC"
+msgstr ""
+
+#. Author URI of the plugin
+#: D:\xampp\htdocs\wordpress\wp-content\plugins\code-embed\index.php
+msgid "http://bplugins.com"
+msgstr ""
+
+#: inc/block.json
+msgctxt "block title"
+msgid "Code Embed"
+msgstr ""
+
+#: inc/block.json
+msgctxt "block description"
+msgid "Embed Code anywhere you want with a lot of functionality through this block."
+msgstr ""
+
+#: inc/block.json
+msgctxt "block keyword"
+msgid "code embed"
+msgstr ""
+
+#: inc/block.json
+msgctxt "block keyword"
+msgid "code"
+msgstr ""
+
+#: inc/block.json
+msgctxt "block keyword"
+msgid "embed code"
+msgstr ""

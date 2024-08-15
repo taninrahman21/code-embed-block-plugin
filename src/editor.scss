@@ -13,9 +13,13 @@ $primaryColor: #4527a4;
   }
 }
 
-.code-container {
+.main-container {
   border: 1px solid #edf2f7;
   border-radius: 0.25rem;
+  position: relative;
+}
+.ace_scrollbar.ace_scrollbar-v {
+  display: none;
 }
 
 .heading {
@@ -33,14 +37,6 @@ $primaryColor: #4527a4;
   padding: 0.25rem 1rem;
   cursor: pointer;
   border-radius: 0.25rem;
+  margin-right: 5px;
   transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.copy-btn:hover {
-  background-color: #357bd8;
-}
-
-.copy-btn.copied {
-  background-color: #51c16b;
-  transform: scale(0.95);
 }

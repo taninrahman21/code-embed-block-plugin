@@ -7,11 +7,10 @@ import { blockIcon } from './utils/icons';
 registerBlockType(metadata, {
 	icon: {
 		src: blockIcon,
-    foreground: '#000000',
+		foreground: "#4527a4"
 	},
-
 	// Build in Functions
-	edit:Edit,
+	edit: Edit,
 
-	save: () =>null,
+	save: () => null,
 });

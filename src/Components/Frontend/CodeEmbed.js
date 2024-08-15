@@ -30,13 +30,16 @@ import "ace-builds/src-noconflict/mode-typescript";
 import "ace-builds/src-noconflict/mode-xml";
 
 
+import { GiCheckMark } from 'react-icons/gi';
+import { IoCopyOutline } from 'react-icons/io5';
 import '../../editor.scss';
 import Style from '../Common/Style';
 
 
 
 const CodeEmbed = ({ attributes }) => {
-  const { content, language, editorTheme, options, mainStyles, headingStyles, cId } = attributes;
+  const { options, mainStyles, headingStyles, cId, mainEditor } = attributes;
+  const { copyBtnType, language, theme, code } = mainEditor;
   const { wrapEnabled, showLineNumbers, showGutter, showPrintMargin, highlightActiveLine, enableBasicAutocompletion, enableLiveAutocompletion, readOnly } = options;
   const { fontSize, tabSize, lineHeight } = mainStyles;
   const [copied, setCopied] = useState(false);
@@ -45,7 +48,7 @@ const CodeEmbed = ({ attributes }) => {
 
   const handleCopyClick = () => {
     codeRef.current.editor.selectAll();
-    navigator.clipboard.writeText(content)
+    navigator.clipboard.writeText(code)
       .then(() => {
         setCopied(true);
         setTimeout(() => setCopied(false), 1500);
@@ -68,16 +71,21 @@ const CodeEmbed = ({ attributes }) => {
       <Style attributes={attributes} />
 
       <div id={`main-wrapper-${cId}`}>
+
         <div className='heading'>
           <p>{headingStyles.headlineText}</p>
 
-          <button
-            className={`copy-btn ${copied ? 'copied' : ''}`}
-            onClick={handleCopyClick}
-            style={{ zIndex: 5999 }}
-          >
-            {copied ? 'Copied' : 'Copy Code'}
-          </button>
+          {
+            copyBtnType == "text" ? <button
+              className={`copy-btn ${copied ? 'copied' : ''}`}
+              onClick={handleCopyClick}
+              style={{ zIndex: 5999 }}
+            >
+              {copied ? 'Copied' : 'Copy Code'}
+            </button> : <div onClick={handleCopyClick} className="copy-btn-icon">
+              {copied ? <GiCheckMark /> : <IoCopyOutline title="Copy Code" />}
+            </div>
+          }
         </div>
 
         <div className="code-editor">
@@ -85,7 +93,7 @@ const CodeEmbed = ({ attributes }) => {
             ref={codeRef}
             placeholder="Start Writing Code..."
             mode={language}
-            theme={editorTheme}
+            theme={theme}
             name="code-embed"
             onLoad={onLoad}
             fontSize={fontSize}
@@ -97,7 +105,7 @@ const CodeEmbed = ({ attributes }) => {
             showPrintMargin={showPrintMargin}
             showGutter={showGutter}
             highlightActiveLine={highlightActiveLine}
-            value={content}
+            value={code}
             setOptions={{
               enableBasicAutocompletion,
               enableLiveAutocompletion,

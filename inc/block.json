@@ -4,11 +4,7 @@
   "title": "Code Embed",
   "description": "Embed Code anywhere you want with a lot of functionality through this block.",
   "category": "widgets",
-  "keywords": [
-    "code embed",
-    "code",
-    "embed code"
-  ],
+  "keywords": ["code embed", "code", "embed code"],
   "textdomain": "code-embed",
   "attributes": {
     "align": {
@@ -19,21 +15,19 @@
       "type": "string",
       "default": ""
     },
-    "content": {
+    "alignment": {
       "type": "string",
-      "default": ""
+      "default": "center"
     },
-    "language": {
-      "type": "string",
-      "default": "javascript"
-    },
-    "editorTheme": {
-      "type": "string",
-      "default": "github"
-    },
-    "copyBtnPosition": {
-      "type": "string",
-      "default": "topright"
+    "mainEditor": {
+      "type": "object",
+      "default": {
+        "code": "",
+        "language": "html",
+        "theme": "github",
+        "copyBtnType": "icon",
+        "copyBtnPosition": "topright"
+      }
     },
     "headingStyles": {
       "type": "object",
@@ -70,7 +64,7 @@
     "mainStyles": {
       "type": "object",
       "default": {
-        "height": "100px",
+        "height": "400px",
         "width": "100%",
         "padding": {
           "top": "20px",
@@ -89,16 +83,15 @@
         "textColor": "white",
         "backgroundColor": "#4a90e2",
         "typo": {
-          "fontSize": "10px"
-        }
+          "fontSize": 12
+        },
+        "copyBtnIconColor": "#4a90e2",
+        "copyBtnIconSize": 25
       }
     }
   },
   "supports": {
-    "align": [
-      "wide",
-      "full"
-    ],
+    "align": ["wide", "full"],
     "html": false
   },
   "example": {

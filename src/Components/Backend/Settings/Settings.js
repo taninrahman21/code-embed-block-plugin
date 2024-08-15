@@ -1,4 +1,4 @@
-import { InspectorControls } from '@wordpress/block-editor';
+import { AlignmentToolbar, BlockControls, InspectorControls } from '@wordpress/block-editor';
 import { TabPanel } from '@wordpress/components';
 import React from 'react';
 import General from './General/General';
@@ -6,7 +6,7 @@ import './Settings.scss';
 import Style from './Style/Style';
 
 const Settings = ({ attributes, setAttributes }) => {
-
+  const { alignment } = attributes;
   return (
     <>
       <InspectorControls>
@@ -33,6 +33,13 @@ const Settings = ({ attributes, setAttributes }) => {
           )}
         </TabPanel>
       </InspectorControls>
+
+      <BlockControls>
+        <AlignmentToolbar
+          value={alignment}
+          onChange={(value) => setAttributes({ alignment: value })}
+        />
+      </BlockControls>
     </>
   );
 };

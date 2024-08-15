@@ -30,16 +30,22 @@ import "ace-builds/src-noconflict/mode-sass";
 import "ace-builds/src-noconflict/mode-typescript";
 import "ace-builds/src-noconflict/mode-xml";
 
+import { GiCheckMark } from "react-icons/gi";
+import { IoCopyOutline } from "react-icons/io5";
+
 import Settings from "./Components/Backend/Settings/Settings";
 import Style from "./Components/Common/Style";
 import './editor.scss';
+import { extractNumber, updateData } from "./utils/functions";
+
 
 
 
 
 const Edit = props => {
 	const { className, setAttributes, clientId, attributes } = props;
-	const { content, language, editorTheme, options, mainStyles, headingStyles, cId } = attributes;
+	const { options, mainStyles, headingStyles, cId, mainEditor } = attributes;
+	const { copyBtnType, language, theme, code } = mainEditor;
 	const { wrapEnabled, showLineNumbers, showGutter, showPrintMargin, highlightActiveLine, enableBasicAutocompletion, enableLiveAutocompletion } = options;
 	const { fontSize, tabSize, lineHeight, height } = mainStyles;
 
@@ -50,7 +56,7 @@ const Edit = props => {
 
 	const handleCopyClick = () => {
 		codeRef.current.editor.selectAll();
-		navigator.clipboard.writeText(content)
+		navigator.clipboard.writeText(code)
 			.then(() => {
 				setCopied(true);
 				setTimeout(() => setCopied(false), 1500);
@@ -69,16 +75,19 @@ const Edit = props => {
 	};
 
 	const handleChange = (value) => {
-		setAttributes({ content: value });
+		// setAttributes({ mainEditor: updateData(mainEditor, value, "code") });
 
 		const lines = value.split('\n').length;
 		const minHeight = 100;
 		const eachLineHeight = lineHeight;
 
 		const newHeight = Math.max(minHeight, lines * eachLineHeight);
-		const finalHeight = newHeight > height ? height : newHeight + "px";
+		const finalHeight = newHeight > extractNumber(height) ? height : newHeight + "px";
 
-		setAttributes({ mainStyles: { ...mainStyles, height: finalHeight } })
+		setAttributes({
+			mainStyles: { ...mainStyles, height: finalHeight },
+			mainEditor: updateData(mainEditor, value, "code")
+		})
 	}
 
 
@@ -87,7 +96,7 @@ const Edit = props => {
 			<Style attributes={attributes} />
 			<Settings attributes={attributes} setAttributes={setAttributes} />
 
-			<div id={`main-wrapper-${cId}`}>
+			<div id={`main-wrapper-${cId}`} className='main-container'>
 
 				<div className='heading'>
 					<RichText
@@ -97,13 +106,17 @@ const Edit = props => {
 						onChange={(headlineText) => setAttributes({ headingStyles: { ...headingStyles, headlineText } })}
 					/>
 
-					<button
-						className={`copy-btn ${copied ? 'copied' : ''}`}
-						onClick={handleCopyClick}
-						style={{ zIndex: 5999 }}
-					>
-						{copied ? 'Copied' : 'Copy Code'}
-					</button>
+					{
+						copyBtnType == "text" ? <button
+							className={`copy-btn ${copied ? 'copied' : ''}`}
+							onClick={handleCopyClick}
+							style={{ zIndex: 5999 }}
+						>
+							{copied ? 'Copied' : 'Copy Code'}
+						</button> : <div onClick={handleCopyClick} className="copy-btn-icon">
+							{copied ? <GiCheckMark /> : <IoCopyOutline title="Copy Code" />}
+						</div>
+					}
 				</div>
 
 				<div className="code-editor">
@@ -111,7 +124,7 @@ const Edit = props => {
 						ref={codeRef}
 						placeholder="Start Writing Code..."
 						mode={language}
-						theme={editorTheme}
+						theme={theme}
 						name="quick-code-embed"
 						onLoad={onLoad}
 						onChange={handleChange}
@@ -123,7 +136,7 @@ const Edit = props => {
 						showPrintMargin={showPrintMargin}
 						showGutter={showGutter}
 						highlightActiveLine={highlightActiveLine}
-						value={content}
+						value={code}
 						setOptions={{
 							enableBasicAutocompletion,
 							enableLiveAutocompletion,

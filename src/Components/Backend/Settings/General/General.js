@@ -1,60 +1,51 @@
 import { PanelBody, SelectControl, ToggleControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
+import { updateData } from '../../../../utils/functions';
+import { languageOptions, themeOptions } from '../../../../utils/options';
 
 
 
 const General = ({ attributes, setAttributes }) => {
-  const { language, editorTheme, options, copyBtnPosition } = attributes;
+  const { options, mainEditor } = attributes;
+  const { copyBtnType, language, theme, copyBtnPosition } = mainEditor;
   const { wrapEnabled, showLineNumbers, showGutter, showPrintMargin, highlightActiveLine, enableBasicAutocompletion, enableLiveAutocompletion, readOnly, displayHeading } = options;
-
+  
 
   return <>
     <PanelBody title={__('Settings', 'code-embed')}>
-      <SelectControl label="Language" value={language}
-        options={[
-          { label: 'JavaScript', value: 'javascript' },
-          { label: 'HTML', value: 'html' },
-          { label: 'CSS', value: 'css' },
-          { label: 'PHP', value: 'php' },
-          { label: 'Python', value: 'python' },
-          { label: 'XML', value: 'xml' },
-          { label: 'Ruby', value: 'ruby' },
-          { label: 'Java', value: 'java' },
-          { label: 'TypeScript', value: 'typescript' },
-          { label: 'Json', value: 'json' },
-          { label: 'GoLang', value: 'golang' },
-          { label: 'C Sharp', value: 'csharp' },
-          { label: 'MySql', value: 'mysql' },
-          { label: 'Sass', value: 'sass' },
-          { label: 'Elixir', value: 'elixir' }
-        ]} onChange={(language) => setAttributes({ language })} />
+      <SelectControl
+        label="Language"
+        value={language}
+        options={languageOptions}
+        onChange={(language) => setAttributes({ mainEditor: updateData(mainEditor, language, "language") })} />
 
       <SelectControl
         label="Editor Theme"
-        value={editorTheme}
-        options={[
-          { label: 'Monokai', value: 'monokai' },
-          { label: 'Github', value: 'github' },
-          { label: 'Tomorrow', value: 'tomorrow' },
-          { label: 'Solarized_Dark', value: 'solarized_dark' },
-          { label: 'Solarized_Light', value: 'solarized_light' },
-          { label: 'Terminal', value: 'terminal' },
-          { label: 'Kuroir', value: 'kuroir' },
-          { label: 'XCode', value: 'xcode' },
-          { label: 'TextMate', value: 'textmate' },
-          { label: 'Twilight', value: 'twilight' }
-        ]}
-        onChange={(theme) => setAttributes({ editorTheme: theme })} />
+        value={theme}
+        options={themeOptions}
+        onChange={(theme) => setAttributes({ mainEditor: updateData(mainEditor, theme, "theme") })} />
 
       <SelectControl
-        label="Copy Button Position"
-        value={copyBtnPosition}
+        label={__("Copy Button Type")}
+        value={copyBtnType}
         options={[
-          { label: 'Top Right', value: 'topright' },
-          { label: 'Bottom Right', value: 'bottomright' }
+          { label: 'Text', value: 'text' },
+          { label: 'Icon', value: 'icon' }
         ]}
-        onChange={(position) => setAttributes({ copyBtnPosition: position })} />
+        onChange={(value) => setAttributes({ mainEditor: updateData(mainEditor, value, "copyBtnType") })}
+      />
+
+      {
+        !displayHeading && <SelectControl
+          label="Copy Button Position"
+          value={copyBtnPosition}
+          options={[
+            { label: 'Top Right', value: 'topright' },
+            { label: 'Bottom Right', value: 'bottomright' }
+          ]}
+          onChange={(position) => setAttributes({ mainEditor: updateData(mainEditor, position, "copyBtnPosition") })} />
+      }
 
 
       <ToggleControl
